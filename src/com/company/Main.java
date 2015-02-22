@@ -49,7 +49,7 @@ public class Main {
                 computerHand.add(newCard); //Adds to computerHand
             }
         }
-        printHands(playerHand, computerHand);
+        printHand(playerHand);
     }
 
     public static String getCard() {
@@ -62,20 +62,16 @@ public class Main {
         int card = random.nextInt(14 - 1); //Picks random card
         int suit = random.nextInt(5 - 1); //Of a random suit
 
-        String drawnCard = (cards[card] + suits[suit]); //Gets array cards at position card, then array suits at position suit
+        String drawnCard = (cards[card] + " " + suits[suit]); //Gets array cards at position card, then array suits at position suit
 
         return drawnCard; //Returns the drawn card.
     }
 
-    public static void printHands(LinkedList playerHand, LinkedList computerHand) {
+    public static void printHand(LinkedList playerHand) {
         System.out.println("Player's hand");
         for (int x = 0; x < playerHand.size(); x++) {
-            System.out.print(playerHand.get(x) + " ");
+            System.out.print(playerHand.get(x) + ", ");
         }
         System.out.println("\r\n");
-        System.out.println("Computer's hand");
-        for (int x = 0; x <computerHand.size(); x++) {
-            System.out.print(computerHand.get(x) + " ");
-        }
     }
 }
