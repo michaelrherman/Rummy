@@ -22,12 +22,15 @@ public class Main {
             System.out.println("Something went wrong. Please start again.");
         }
 
-        LinkedList takenCards = new LinkedList(); //Starts an ArrayList of cards which have already been drawn
+        System.out.println("\r\n");
+
+        LinkedList takenCards = new LinkedList(); //Starts LinkedList of cards which have already been drawn
+        LinkedList playedCards = new LinkedList(); //Starts LinkedList of cards which have been played
         LinkedList playerHand = new LinkedList(); //Starts LinkedList representing the player's hand
         LinkedList computerHand = new LinkedList(); //Starts LinkedList representing the computer's hand
 
         //Starts the game by filling the players hands
-        String newCard = new String();
+        Object newCard = new Object();
         for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
             newCard = getCard();
             boolean retry = takenCards.contains(newCard); //Verifies it's not one that's already generated
@@ -50,19 +53,25 @@ public class Main {
             }
         }
         printHand(playerHand);
+        printPlayed(playedCards);
     }
 
-    public static String getCard() {
+    public static Object getCard() {
 
-        String[] cards = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+        char spade = 9824; //This is the code you gave on D2L for the Unicode of the suits
+        char club = 9827;
+        char heart = 9829;
+        char diamond = 9830;
+
+        Object[] cards = {"Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"};
         //An array seems proper here since we won't be adding or removing data and we can load the info directly
-        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"}; //Ditto
+        Object[] suits = {heart, diamond, club, spade}; //Ditto
 
         Random random = new Random();
         int card = random.nextInt(14 - 1); //Picks random card
         int suit = random.nextInt(5 - 1); //Of a random suit
 
-        String drawnCard = (cards[card] + " " + suits[suit]); //Gets array cards at position card, then array suits at position suit
+        String drawnCard = (cards[card] + "" + suits[suit]); //Gets array cards at position card, then array suits at position suit
 
         return drawnCard; //Returns the drawn card.
     }
@@ -70,8 +79,14 @@ public class Main {
     public static void printHand(LinkedList playerHand) {
         System.out.println("Player's hand");
         for (int x = 0; x < playerHand.size(); x++) {
-            System.out.print(playerHand.get(x) + ", ");
+            System.out.print(playerHand.get(x) + " ");
+        } System.out.println("\r\n");
+    }
+
+    public static void printPlayed (LinkedList playedCards) {
+        System.out.println("Cards on table");
+        for (int x = 0; x < playedCards.size(); x++) {
+            System.out.println(playedCards.get(x) + " ");
         }
-        System.out.println("\r\n");
     }
 }
