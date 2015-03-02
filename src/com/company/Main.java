@@ -71,7 +71,9 @@ public class Main {
         int card = random.nextInt(14 - 1); //Picks random card
         int suit = random.nextInt(5 - 1); //Of a random suit
 
-        String drawnCard = (cards[card] + "" + suits[suit]); //Gets array cards at position card, then array suits at position suit
+        Object alpha = cards[card]; //Gets array cards at position card
+        Object bravo = suits[suit]; // Then array suits at position suit
+        Object[] drawnCard = {alpha, bravo}; //Puts them into an object array drawnCard
 
         return drawnCard; //Returns the drawn card.
     }
@@ -79,14 +81,31 @@ public class Main {
     public static void printHand(LinkedList playerHand) {
         System.out.println("Player's hand");
         for (int x = 0; x < playerHand.size(); x++) {
-            System.out.print(playerHand.get(x) + " ");
+            Object[] charlie = (Object[]) playerHand.get(x);
+            Object delta; Object echo;
+            delta = charlie[0];
+            echo = charlie[1];
+            System.out.print(delta + "" + echo + " ");
         } System.out.println("\r\n");
     }
 
-    public static void printPlayed (LinkedList playedCards) {
+    public static void printPlayed(LinkedList playedCards) {
         System.out.println("Cards on table");
         for (int x = 0; x < playedCards.size(); x++) {
-            System.out.println(playedCards.get(x) + " ");
+            Object[] charlie = (Object[]) playedCards.get(x);
+            Object delta; Object echo;
+            delta = charlie[0];
+            echo = charlie[1];
+            System.out.print(delta + "" + echo + " ");
         }
     }
+
+/*    public void checkBox (LinkedList computerHand) {
+        for (int x = 0; x < computerHand.size(); x++) {
+            Object card = computerHand.get(x);
+            if (card.contains) {
+
+            }
+        }
+    }*/
 }
