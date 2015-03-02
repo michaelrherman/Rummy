@@ -28,32 +28,47 @@ public class Main {
         LinkedList playedCards = new LinkedList(); //Starts LinkedList of cards which have been played
         LinkedList playerHand = new LinkedList(); //Starts LinkedList representing the player's hand
         LinkedList computerHand = new LinkedList(); //Starts LinkedList representing the computer's hand
+        Object Card; //Initializes a card as its own object
+        Object newCard; //Initializes a new card as an object
 
-        //Starts the game by filling the players hands
-        Object newCard = new Object();
+        //Starts the game by filling the player's hands
         for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
             newCard = getCard();
-            boolean retry = takenCards.contains(newCard); //Verifies it's not one that's already generated
+            Card = newCard;
+            String newcardString = cardtoString(Card);
+            boolean retry = takenCards.contains(newcardString); //Verifies it's not one that's already generated
             if (retry == true) { //If it is,
                 newCard = getCard(); //gets a new card
             } else if (retry == false) { //If not,
-                takenCards.add(newCard); //Adds to takenCards
+                takenCards.add(newcardString); //Adds to takenCards
                 playerHand.add(newCard); //Adds to playerHand
             }
         }
 
-        for (int x = 0; computerHand.size() < 10; x++) {
+        //Then fills the computer's hand
+        for (int x = 0; computerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
             newCard = getCard();
-            boolean retry = takenCards.contains(newCard);
+            Card = newCard;
+            String newcardString = cardtoString(Card);
+            boolean retry = takenCards.contains(newcardString); //Verifies it's not one that's already generated
             if (retry == true) { //If it is,
                 newCard = getCard(); //gets a new card
             } else if (retry == false) { //If not,
-                takenCards.add(newCard); //Adds to takenCards
+                takenCards.add(newcardString); //Adds to takenCards
                 computerHand.add(newCard); //Adds to computerHand
             }
         }
-        printHand(playerHand);
-        printPlayed(playedCards);
+
+        printHand(playerHand); //Prints the cards which are in the player's hand
+        printPlayed(playedCards); //Prints the cards which have been played
+
+        LinkedList checkHand; //Starts new LinkedList which will be used to check the hands
+
+        checkHand = computerHand; //Assigns the computer's hand to checkHand
+        checkBox(checkHand); //Checks the hand for boxes
+
+        checkHand = playerHand; //Assigns the player's hand to checkHand
+        checkBox(checkHand);//Checks the hand for boxes
     }
 
     public static Object getCard() {
@@ -78,6 +93,14 @@ public class Main {
         return drawnCard; //Returns the drawn card.
     }
 
+    public static String cardtoString(Object Card) {
+        Object[] lima = (Object[]) Card;
+        Object mike = lima[0];
+        Object november = lima[1];
+        String cardString = mike + "" + november;
+    return cardString;
+    }
+
     public static void printHand(LinkedList playerHand) {
         System.out.println("Player's hand");
         for (int x = 0; x < playerHand.size(); x++) {
@@ -100,12 +123,23 @@ public class Main {
         }
     }
 
-/*    public void checkBox (LinkedList computerHand) {
-        for (int x = 0; x < computerHand.size(); x++) {
-            Object card = computerHand.get(x);
-            if (card.contains) {
+    public static void checkBox (LinkedList checkHand) {
+        for (int x = 0; x < checkHand.size(); x++) {
+            Object[] foxtrot = (Object[]) checkHand.get(x);
+            Object golf = foxtrot[0];
+            for (int y = x + 1; y < checkHand.size(); y++) {
+                Object[] hotel = (Object[]) checkHand.get(y);
+                Object india = hotel[0];
 
+                if (golf.equals(india)) {
+                    for (int z = x + 2; z < checkHand.size(); z++) {
+                    Object[] juliet = (Object[]) checkHand.get(z);
+                    Object kilo = juliet[0];
+                    if (golf.equals(india) && india.equals(kilo))
+                        System.out.println("Holy shit it worked!");
+                    }
+                }
             }
         }
-    }*/
+    }
 }
