@@ -5,21 +5,34 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        boolean playing = true;
+        boolean playbyGame = false;
+        boolean playbyTotal = false;
+        int finish = 0;
+
         System.out.println("Welcome to Rummy!");
+
+        while(true) {
         System.out.println("Would you like to play by games or to a total? \n" + "Enter games or total");
         Scanner scanner = new Scanner(System.in);
         String response = scanner.nextLine();
-
-        if (response.equalsIgnoreCase("games")) {
-            System.out.println("How many games would you like to play?");
-            Scanner scanner1 = new Scanner(System.in);
-            int games = scanner1.nextInt();
-        } else if (response.equalsIgnoreCase("total")) {
-            System.out.println("What total would you like to play to?");
-            Scanner scanner2 = new Scanner(System.in);
-            int total = scanner2.nextInt();
-        } else {
-            System.out.println("Something went wrong. Please start again.");
+            if (response.equalsIgnoreCase("games")) {
+                playbyGame = true;
+                System.out.println("How many games would you like to play?");
+                Scanner scanner1 = new Scanner(System.in);
+                int games = scanner1.nextInt();
+                finish = games;
+                break;
+            } else if (response.equalsIgnoreCase("total")) {
+                playbyTotal = true;
+                System.out.println("What total would you like to play to?");
+                Scanner scanner2 = new Scanner(System.in);
+                int total = scanner2.nextInt();
+                finish = total;
+                break;
+            } else {
+                System.out.println("Something went wrong. Please re-enter. \n");
+            }
         }
 
         System.out.println("\r\n");
@@ -59,16 +72,40 @@ public class Main {
             }
         }
 
-        printHand(playerHand); //Prints the cards which are in the player's hand
-        printPlayed(playedCards); //Prints the cards which have been played
+        int counter = 0;
 
-        LinkedList checkHand; //Starts new LinkedList which will be used to check the hands
+        while (playing == true) {
+            if (playbyGame == true) {
+                if (counter < finish) {
+/*                    printHand(playerHand); //Prints the cards which are in the player's hand
+                    printPlayed(playedCards); //Prints the cards which have been played
 
-        checkHand = computerHand; //Assigns the computer's hand to checkHand
-        checkBox(checkHand); //Checks the hand for boxes
+                    LinkedList checkHand; //Starts new LinkedList which will be used to check the hands
 
-        checkHand = playerHand; //Assigns the player's hand to checkHand
-        checkBox(checkHand);//Checks the hand for boxes
+                    checkHand = computerHand; //Assigns the computer's hand to checkHand
+                    checkBox(checkHand); //Checks the hand for boxes
+
+                    checkHand = playerHand; //Assigns the player's hand to checkHand
+                    checkBox(checkHand);//Checks the hand for boxes
+                    */
+                    counter++;
+                } else if (counter >= finish) {
+                    // Determine who won
+                    playing = false;
+                    break;
+                }
+            } else if (playbyTotal == true) {
+                if (counter < finish) {
+                    //The game plays
+                } else if (counter >= finish) {
+                    // Determine who won
+                    playing = false;
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Thanks for playing!");
     }
 
     public static Object getCard() {
@@ -122,7 +159,6 @@ public class Main {
             System.out.print(delta + "" + echo + " ");
         }
     }
-
     public static void checkBox (LinkedList checkHand) {
         for (int x = 0; x < checkHand.size(); x++) {
             Object[] foxtrot = (Object[]) checkHand.get(x);
@@ -135,8 +171,8 @@ public class Main {
                     for (int z = x + 2; z < checkHand.size(); z++) {
                     Object[] juliet = (Object[]) checkHand.get(z);
                     Object kilo = juliet[0];
-                    if (golf.equals(india) && india.equals(kilo))
-                        System.out.println("Holy shit it worked!");
+                    if (india.equals(kilo))
+                        System.out.println("Box Made!");
                     }
                 }
             }
