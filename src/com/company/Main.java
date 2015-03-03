@@ -73,6 +73,8 @@ public class Main {
         }
 
         int counter = 0;
+        int playerScore = 0;
+        int computerScore = 0;
 
         while (playing == true) {
             if (playbyGame == true) {
@@ -95,10 +97,43 @@ public class Main {
                     break;
                 }
             } else if (playbyTotal == true) {
-                if (counter < finish) {
-                    //The game plays
-                } else if (counter >= finish) {
-                    // Determine who won
+                if (playerScore < finish && computerScore < finish) {
+                    int playerPoints = 0;
+                    int computerPoints = 0;
+
+                    playerPoints++;
+                    computerPoints++;
+
+                    playerScore = playerScore + playerPoints;
+                    computerScore = computerScore + computerPoints;
+                } else if (playerScore >= finish && computerScore < finish) {
+                    System.out.println("Player wins!");
+                    System.out.println("Player score: "+playerScore);
+                    System.out.println("Computer score: "+computerScore);
+                    playing = false;
+                    break;
+                } else if (playerScore < finish && computerScore >= finish) {
+                    System.out.println("Computer wins!");
+                    System.out.println("Computer score: "+computerScore);
+                    System.out.println("Player score: "+playerScore);
+                    playing = false;
+                    break;
+                } else if (playerScore >= finish && computerScore >= finish && playerScore > computerScore) {
+                    System.out.println("Player wins!");
+                    System.out.println("Player score: "+playerScore);
+                    System.out.println("Computer score: "+computerScore);
+                    playing = false;
+                    break;
+                } else if (playerScore >= finish && computerScore >= finish && playerScore < computerScore) {
+                    System.out.println("Computer wins!");
+                    System.out.println("Computer score: "+computerScore);
+                    System.out.println("Player score: "+playerScore);
+                    playing = false;
+                    break;
+                } else {
+                    System.out.println("It's a tie!");
+                    System.out.println("Player score: "+playerScore);
+                    System.out.println("Computer score: "+computerScore);
                     playing = false;
                     break;
                 }
