@@ -37,10 +37,10 @@ public class Main {
 
         System.out.println("\r\n");
 
-        LinkedList takenCards = new LinkedList(); //Starts LinkedList of cards which have already been drawn
-        LinkedList playedCards = new LinkedList(); //Starts LinkedList of cards which have been played
-        LinkedList playerHand = new LinkedList(); //Starts LinkedList representing the player's hand
-        LinkedList computerHand = new LinkedList(); //Starts LinkedList representing the computer's hand
+        LinkedList<Card1> takenCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have already been drawn
+        LinkedList<Card1> playedCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have been played
+        LinkedList<Card1> playerHand = new LinkedList<Card1>(); //Starts LinkedList representing the player's hand
+        LinkedList<Card1> computerHand = new LinkedList<Card1>(); //Starts LinkedList representing the computer's hand
         Card1 Card; //Initializes a card as its own object
         Card1 newCard; //Initializes a new card as an object
 
@@ -48,13 +48,13 @@ public class Main {
         for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
             newCard = Card1.getrandomCard();
             Card = newCard;
-            String newcardString = Card.toString();
-            boolean retry = takenCards.contains(newcardString); //Verifies it's not one that's already generated
+
+            boolean retry = takenCards.contains(Card); //Verifies it's not one that's already generated
             if (retry == true) { //If it is,
                 newCard = Card1.getrandomCard(); //gets a new card
             } else if (retry == false) { //If not,
-                takenCards.add(newcardString); //Adds to takenCards
-                playerHand.add(newCard); //Adds to playerHand
+                takenCards.add(Card); //Adds to takenCards
+                playerHand.add(Card); //Adds to playerHand
             }
         }
 
@@ -62,13 +62,13 @@ public class Main {
         for (int x = 0; computerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
             newCard = Card1.getrandomCard();
             Card = newCard;
-            String newcardString = Card.toString();
-            boolean retry = takenCards.contains(newcardString); //Verifies it's not one that's already generated
+
+            boolean retry = takenCards.contains(Card); //Verifies it's not one that's already generated
             if (retry == true) { //If it is,
                 newCard = Card1.getrandomCard(); //gets a new card
             } else if (retry == false) { //If not,
-                takenCards.add(newcardString); //Adds to takenCards
-                computerHand.add(newCard); //Adds to playerHand
+                takenCards.add(Card); //Adds to takenCards
+                computerHand.add(Card); //Adds to playerHand
             }
         }
 
@@ -143,25 +143,24 @@ public class Main {
         System.out.println("Thanks for playing!");
     }
 
-    public static void printHand(LinkedList playerHand) {
+    public static void printHand(LinkedList<Card1> playerHand) {
         System.out.println("Player's hand");
-        for (int x = 0; x < playerHand.size(); x++) {
-            Object[] charlie = (Object[]) playerHand.get(x);
-            Object delta; Object echo;
-            delta = charlie[0];
-            echo = charlie[1];
-            System.out.print(delta + "" + echo + " ");
-        } System.out.println("\r\n");
+        for (Card1 card1 : playerHand) {
+            Object william = card1.getFace();
+            String xray = william.toString();
+            char yankee = card1.getSuit();
+            System.out.print(xray + "" + yankee + " ");
+        }
     }
 
-    public static void printPlayed(LinkedList playedCards) {
+    public static void printPlayed(LinkedList<Card1> playedCards) {
+        System.out.println("\n");
         System.out.println("Cards on table");
-        for (int x = 0; x < playedCards.size(); x++) {
-            Object[] charlie = (Object[]) playedCards.get(x);
-            Object delta; Object echo;
-            delta = charlie[0];
-            echo = charlie[1];
-            System.out.print(delta + "" + echo + " ");
+        for (Card1 card1 : playedCards) {
+            Object william = card1.getFace();
+            String xray = william.toString();
+            char yankee = card1.getSuit();
+            System.out.print(xray + "" + yankee + " ");
         }
     }
 }
