@@ -37,27 +37,28 @@ public class Main {
 
         System.out.println("\r\n");
 
-        LinkedList<Card1> takenCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have already been drawn
-        LinkedList<Card1> playedCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have been played
-        LinkedList<Card1> playerHand = new LinkedList<Card1>(); //Starts LinkedList representing the player's hand
-        LinkedList<Card1> computerHand = new LinkedList<Card1>(); //Starts LinkedList representing the computer's hand
-
-        //Starts the game by filling the player's hands
-        LinkedList<Card1> hand = playerHand;
-        for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
-            getnewCard(hand,takenCards);
-        }
-        //Then fills the computer's hand
-        hand = computerHand;
-        for (int x = 0; computerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
-            getnewCard(hand,takenCards);
-        }
-
         int counter = 0; //Sets a counter to zero for playing by games
         int playerScore = 0; //Initializes player's score to zero
         int computerScore = 0; //Initializes computer's score to zero
 
         while (playing == true) {
+
+            LinkedList<Card1> takenCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have already been drawn
+            LinkedList<Card1> playedCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have been played
+            LinkedList<Card1> playerHand = new LinkedList<Card1>(); //Starts LinkedList representing the player's hand
+            LinkedList<Card1> computerHand = new LinkedList<Card1>(); //Starts LinkedList representing the computer's hand
+
+            //Starts the game by filling the player's hands
+            LinkedList<Card1> hand = playerHand;
+            for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
+                getnewCard(hand,takenCards);
+            }
+            //Then fills the computer's hand
+            hand = computerHand;
+            for (int x = 0; computerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
+                getnewCard(hand,takenCards);
+            }
+
             if (playbyGame == true) { //Plays by game
                 if (counter < finish) {
                     printHand(playerHand); //Prints the cards which are in the player's hand
