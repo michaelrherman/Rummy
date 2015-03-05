@@ -43,13 +43,13 @@ public class Main {
 
         while (playing == true) {
 
-            LinkedList<Card1> takenCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have already been drawn
-            LinkedList<Card1> playedCards = new LinkedList<Card1>(); //Starts LinkedList of cards which have been played
-            LinkedList<Card1> playerHand = new LinkedList<Card1>(); //Starts LinkedList representing the player's hand
-            LinkedList<Card1> computerHand = new LinkedList<Card1>(); //Starts LinkedList representing the computer's hand
+            LinkedList<Card> takenCards = new LinkedList<Card>(); //Starts LinkedList of cards which have already been drawn
+            LinkedList<Card> playedCards = new LinkedList<Card>(); //Starts LinkedList of cards which have been played
+            LinkedList<Card> playerHand = new LinkedList<Card>(); //Starts LinkedList representing the player's hand
+            LinkedList<Card> computerHand = new LinkedList<Card>(); //Starts LinkedList representing the computer's hand
 
             //Starts the game by filling the player's hands
-            LinkedList<Card1> hand = playerHand;
+            LinkedList<Card> hand = playerHand;
             for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
                 getnewCard(hand,takenCards);
             }
@@ -65,7 +65,7 @@ public class Main {
                     printPlayed(playedCards); //Prints the cards which have been played
                     draw(playerHand, takenCards);
                     toPlay(playerHand);
-                    //EDWIN - Add your comparison code here
+                    CheckCard(playerHand);
                     counter++;
                 } else if (counter >= finish) { //Once chosen number of games is played, determines winner
                     if (playerScore > computerScore) {
@@ -133,36 +133,29 @@ public class Main {
         System.out.println("Thanks for playing!"); //You're welcome
     }
 
-    public static void printHand(LinkedList<Card1> playerHand) { //Prints the player's hand
+    public static void printHand(LinkedList<Card> playerHand) { //Prints the player's hand
         System.out.println("Player's hand");
         Integer counter = 0;
-        for (Card1 card1 : playerHand) {
-            String victor = counter.toString(); //Creates leading integer so user can indicate their choices
-            Object william = card1.getFace();
-            String xray = william.toString();
-            char yankee = card1.getSuit();
-            System.out.print(victor+".)"+xray + "" + yankee + "  ");
+        for (Card card1 : playerHand) {
+            System.out.print(card1 + " ");
             counter++;
         }
     }
 
-    public static void printPlayed(LinkedList<Card1> playedCards) { //Prints the cards that have been played
+    public static void printPlayed(LinkedList<Card> playedCards) { //Prints the cards that have been played
         System.out.println("\n");
         System.out.println("Cards on table");
-        for (Card1 card1 : playedCards) { //No need for a counter here
-            Object william = card1.getFace();
-            String xray = william.toString();
-            char yankee = card1.getSuit();
-            System.out.print(xray + "" + yankee + " ");
+        for (Card card1 : playedCards) { //No need for a counter here
+            System.out.print(card1 + " ");
         }
     }
 
-    public static LinkedList<Card1> getnewCard(LinkedList<Card1> hand, LinkedList<Card1> takenCards) { //Gets a new card
-        Card1 newCard = Card1.getrandomCard(); //Calls getrandomCard() from Card1 class
+    public static LinkedList<Card> getnewCard(LinkedList<Card> hand, LinkedList<Card> takenCards) { //Gets a new card
+        Card newCard = Card.getrandomCard(); //Calls getrandomCard() from Card1 class
 
         boolean retry = takenCards.contains(newCard); //Verifies it's not one that's already generated
         if (retry == true) { //If it is,
-            newCard = Card1.getrandomCard(); //gets a new card
+            newCard = Card.getrandomCard(); //gets a new card
         } else if (retry == false) { //If not,
             takenCards.add(newCard); //Adds to takenCards
             hand.add(newCard); //Adds to playerHand
@@ -170,7 +163,7 @@ public class Main {
         return hand; //
     }
 
-    public static LinkedList<Card1> draw(LinkedList<Card1> playerHand, LinkedList<Card1> takenCards) { //Draws a card
+    public static LinkedList<Card> draw(LinkedList<Card> playerHand, LinkedList<Card> takenCards) { //Draws a card
         Scanner scanner = new Scanner(System.in);
         boolean cont = true;
 
@@ -182,7 +175,7 @@ public class Main {
                 cont = false;
                 break;
             } else if (response.equalsIgnoreCase("Y")) {
-                LinkedList<Card1> hand = playerHand;
+                LinkedList<Card> hand = playerHand;
                 playerHand = getnewCard(hand, takenCards); //Gets another card
                 printHand(playerHand); //Prints the player's new hand
             } else {
@@ -192,8 +185,9 @@ public class Main {
     return playerHand;
     }
 
-    public static LinkedList<Card1> toPlay(LinkedList<Card1> playerHand) { //Takes input from player on which cards to play.
-        LinkedList<Card1> toPlay = new LinkedList<Card1>();
+
+    public static LinkedList<Card> toPlay(LinkedList<Card> playerHand) { //Takes input from player on which cards to play.
+        LinkedList<Card> toPlay = new LinkedList<Card>();
         Scanner scanner = new Scanner(System.in);
         Scanner scanner1 = new Scanner(System.in);
         boolean cont = true;
@@ -201,7 +195,7 @@ public class Main {
         while(cont == true) {
             System.out.println("What cards would you like to play?");
             int position = scanner.nextInt(); //Gets position of card to play
-            Card1 play = playerHand.get(position); //Gets card at that position
+            Card play = playerHand.get(position); //Gets card at that position
             toPlay.add(play);
             System.out.println("Would you like to play another card? \n Y or N");
             String response = scanner1.nextLine();
@@ -212,4 +206,7 @@ public class Main {
         }
         return toPlay;
     }
-}
+
+
+
+    }
