@@ -65,7 +65,6 @@ public class Main {
                     printPlayed(playedCards); //Prints the cards which have been played
                     draw(playerHand, takenCards);
                     toPlay(playerHand);
-                    CheckCard(playerHand);
                     counter++;
                 } else if (counter >= finish) { //Once chosen number of games is played, determines winner
                     if (playerScore > computerScore) {
@@ -204,9 +203,25 @@ public class Main {
                 break;
             }
         }
+
+        for(int i = 0; i < toPlay.size(); i++) {
+            if (Card.isNextinSuit(toPlay)) {
+                playedHand.add(i);
+            } else if(Card.isPrevinSuit(toPlay)) {
+                playedHand.add(i);
+            } else if(Card.checkSet(toPlay)) {
+                playedhand.add(1);
+            }
+            continue;
+
+        }
+
+
         return toPlay;
     }
 
 
 
-    }
+
+
+        }
