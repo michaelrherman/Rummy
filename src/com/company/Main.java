@@ -12,10 +12,10 @@ public class Main {
 
         System.out.println("Welcome to Rummy!");
 
-        while(true) {
-        System.out.println("Would you like to play by games or to a total? \n" + "Enter games or total");
-        Scanner scanner = new Scanner(System.in);
-        String response = scanner.nextLine(); //Gets player's decision to play by games or by total
+        while (true) {
+            System.out.println("Would you like to play by games or to a total? \n" + "Enter games or total");
+            Scanner scanner = new Scanner(System.in);
+            String response = scanner.nextLine(); //Gets player's decision to play by games or by total
             if (response.equalsIgnoreCase("games")) {
                 playbyGame = true;
                 System.out.println("How many games would you like to play?");
@@ -51,12 +51,12 @@ public class Main {
             //Starts the game by filling the player's hands
             LinkedList<Card> hand = playerHand;
             for (int x = 0; playerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
-                getnewCard(hand,takenCards);
+                getnewCard(hand, takenCards);
             }
             //Then fills the computer's hand
             hand = computerHand;
             for (int x = 0; computerHand.size() < 10; x++) { //Draws cards until hand is 10 cards
-                getnewCard(hand,takenCards);
+                getnewCard(hand, takenCards);
             }
 
             if (playbyGame == true) { //Plays by game
@@ -69,16 +69,16 @@ public class Main {
                 } else if (counter >= finish) { //Once chosen number of games is played, determines winner
                     if (playerScore > computerScore) {
                         System.out.println("Player wins!");
-                        System.out.println("Players score: "+playerScore);
-                        System.out.println("Computer score: "+computerScore);
+                        System.out.println("Players score: " + playerScore);
+                        System.out.println("Computer score: " + computerScore);
                     } else if (playerScore < computerScore) {
                         System.out.println("Computer wins!");
                         System.out.println("Computer score: " + computerScore);
                         System.out.println("Players score: " + playerScore);
                     } else {
                         System.out.println("It's a tie."); //Unless it's a tie
-                        System.out.println("Players score: "+playerScore);
-                        System.out.println("Computer score: "+computerScore);
+                        System.out.println("Players score: " + playerScore);
+                        System.out.println("Computer score: " + computerScore);
                     }
                     playing = false;
                     break;
@@ -97,32 +97,32 @@ public class Main {
                     computerScore = computerScore + computerPoints;
                 } else if (playerScore >= finish && computerScore < finish) { //Series of checks for winner once a score goes over chosen total
                     System.out.println("Player wins!");
-                    System.out.println("Player score: "+playerScore);
-                    System.out.println("Computer score: "+computerScore);
+                    System.out.println("Player score: " + playerScore);
+                    System.out.println("Computer score: " + computerScore);
                     playing = false;
                     break;
                 } else if (playerScore < finish && computerScore >= finish) {
                     System.out.println("Computer wins!");
-                    System.out.println("Computer score: "+computerScore);
-                    System.out.println("Player score: "+playerScore);
+                    System.out.println("Computer score: " + computerScore);
+                    System.out.println("Player score: " + playerScore);
                     playing = false;
                     break;
                 } else if (playerScore >= finish && computerScore >= finish && playerScore > computerScore) {
                     System.out.println("Player wins!");
-                    System.out.println("Player score: "+playerScore);
-                    System.out.println("Computer score: "+computerScore);
+                    System.out.println("Player score: " + playerScore);
+                    System.out.println("Computer score: " + computerScore);
                     playing = false;
                     break;
                 } else if (playerScore >= finish && computerScore >= finish && playerScore < computerScore) {
                     System.out.println("Computer wins!");
-                    System.out.println("Computer score: "+computerScore);
-                    System.out.println("Player score: "+playerScore);
+                    System.out.println("Computer score: " + computerScore);
+                    System.out.println("Player score: " + playerScore);
                     playing = false;
                     break;
                 } else {
                     System.out.println("It's a tie.");
-                    System.out.println("Player score: "+playerScore);
-                    System.out.println("Computer score: "+computerScore);
+                    System.out.println("Player score: " + playerScore);
+                    System.out.println("Computer score: " + computerScore);
                     playing = false;
                     break;
                 }
@@ -166,11 +166,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean cont = true;
 
-        while(cont == true){
+        while (cont == true) {
             System.out.println("\n");
             System.out.println("Would you like to draw a card? \n Y or N");
             String response = scanner.nextLine();
-            if (response.equalsIgnoreCase("N")){
+            if (response.equalsIgnoreCase("N")) {
                 cont = false;
                 break;
             } else if (response.equalsIgnoreCase("Y")) {
@@ -181,7 +181,7 @@ public class Main {
                 System.out.println("Input error - try again.");
             }
         }
-    return playerHand;
+        return playerHand;
     }
 
 
@@ -191,7 +191,7 @@ public class Main {
         Scanner scanner1 = new Scanner(System.in);
         boolean cont = true;
 
-        while(cont == true) {
+        while (cont == true) {
             System.out.println("What cards would you like to play?");
             int position = scanner.nextInt(); //Gets position of card to play
             Card play = playerHand.get(position); //Gets card at that position
@@ -203,25 +203,86 @@ public class Main {
                 break;
             }
         }
-
-        for(int i = 0; i < toPlay.size(); i++) {
-            if (Card.isNextinSuit(toPlay)) {
-                playedHand.add(i);
-            } else if(Card.isPrevinSuit(toPlay)) {
-                playedHand.add(i);
-            } else if(Card.checkSet(toPlay)) {
-                playedhand.add(1);
-            }
-            continue;
-
-        }
-
-
         return toPlay;
+
+
     }
 
 
+    public int checkRun(LinkedList<Card> toPlay) {
+        Integer Counter = 0;
+        Integer inaRow = 0;
+        Card firstCard = new Card(Faceenum.ACE, Suitenum.CLUBS);
+        Card previousCard = new Card(Faceenum.ACE, Suitenum.CLUBS);//This is just a throwaway to initialize previousCard.
 
+        for (Card testCard : toPlay) {
+            if (Counter > 0) {
+                if (previousCard.isNextinSuit(testCard)) {
+                    if (inaRow == 0)
+                    {
+                        firstCard = testCard;
+                    }
+                    inaRow++;
+                    if (inaRow == 3)
+                    {
+                        System.out.println(firstCard + "is first. Three in a row");
+                    }
+
+
+                } else {
+                    inaRow = 0;
+                }
+
+
+            }
+            previousCard = testCard;
+            Counter++;
 
 
         }
+        return inaRow;
+
+    }
+
+    public int checkSet(LinkedList<Card> toPlay) {
+        Integer Counter = 0;
+        Integer inaSet = 0;
+        Card firstCard = new Card(Faceenum.ACE, Suitenum.CLUBS);
+        Card previousCard = new Card(Faceenum.ACE, Suitenum.CLUBS);//This is just a throwaway to initialize previousCard.
+
+        for (Card testCard : toPlay) {
+            if (Counter > 0) {
+                if (previousCard.checkSet(testCard)) {
+                    if (inaSet == 0) {
+                        firstCard = testCard;
+                    }
+                    inaSet++;
+                    if (inaSet == 3) {
+                        System.out.println(firstCard + "is first. Three in a set");
+                    }
+
+
+                } else {
+                    inaSet = 0;
+                }
+
+
+            }
+            previousCard = testCard;
+            Counter++;
+
+
+        }
+        return inaSet;
+    }
+}
+
+
+
+
+
+
+
+
+
+
