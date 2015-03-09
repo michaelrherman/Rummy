@@ -140,15 +140,15 @@ public class Main {
             int william = card1.getFace();
             char yankee = card1.getSuit();
             if (william == 1) {
-                System.out.print("Ace" + yankee + " ");
+                System.out.print(victor + ".)" + "Ace" + yankee + " ");
             } else if (william == 11) {
-                System.out.print("Jack" + yankee + " ");
+                System.out.print(victor + ".)" + "Jack" + yankee + " ");
             } else if (william == 12) {
-                System.out.print("Queen" + yankee + " ");
+                System.out.print(victor + ".)" + "Queen" + yankee + " ");
             } else if (william == 13) {
-                System.out.print("King" + yankee + " ");
+                System.out.print(victor + ".)" + "King" + yankee + " ");
             } else {
-                System.out.print(william + "" + yankee + " ");
+                System.out.print(victor + ".)" + william + "" + yankee + " ");
             }
             counter++;
         }
