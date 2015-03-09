@@ -136,7 +136,20 @@ public class Main {
         System.out.println("Player's hand");
         Integer counter = 0;
         for (Card card1 : playerHand) {
-            System.out.print(card1 + " ");
+            String victor = counter.toString(); //Creates leading integer so user can indicate their choices
+            int william = card1.getFace();
+            char yankee = card1.getSuit();
+            if (william == 1) {
+                System.out.print("Ace" + yankee + " ");
+            } else if (william == 11) {
+                System.out.print("Jack" + yankee + " ");
+            } else if (william == 12) {
+                System.out.print("Queen" + yankee + " ");
+            } else if (william == 13) {
+                System.out.print("King" + yankee + " ");
+            } else {
+                System.out.print(william + "" + yankee + " ");
+            }
             counter++;
         }
     }
@@ -145,7 +158,19 @@ public class Main {
         System.out.println("\n");
         System.out.println("Cards on table");
         for (Card card1 : playedCards) { //No need for a counter here
-            System.out.print(card1 + " ");
+            int william = card1.getFace();
+            char yankee = card1.getSuit();
+            if (william == 1) {
+                System.out.print("Ace " + yankee + " ");
+            } else if (william == 11) {
+                System.out.print("Jack" + yankee + " ");
+            } else if (william == 12) {
+                System.out.print("Queen " + yankee + " ");
+            } else if (william == 13) {
+                System.out.print("King " + yankee + " ");
+            } else {
+                System.out.print(william + "" + yankee + " ");
+            }
         }
     }
 
@@ -184,7 +209,6 @@ public class Main {
         return playerHand;
     }
 
-
     public static LinkedList<Card> toPlay(LinkedList<Card> playerHand) { //Takes input from player on which cards to play.
         LinkedList<Card> toPlay = new LinkedList<Card>();
         Scanner scanner = new Scanner(System.in);
@@ -204,85 +228,5 @@ public class Main {
             }
         }
         return toPlay;
-
-
-    }
-
-
-    public int checkRun(LinkedList<Card> toPlay) {
-        Integer Counter = 0;
-        Integer inaRow = 0;
-        Card firstCard = new Card(Faceenum.ACE, Suitenum.CLUBS);
-        Card previousCard = new Card(Faceenum.ACE, Suitenum.CLUBS);//This is just a throwaway to initialize previousCard.
-
-        for (Card testCard : toPlay) {
-            if (Counter > 0) {
-                if (previousCard.isNextinSuit(testCard)) {
-                    if (inaRow == 0)
-                    {
-                        firstCard = testCard;
-                    }
-                    inaRow++;
-                    if (inaRow == 3)
-                    {
-                        System.out.println(firstCard + "is first. Three in a row");
-                    }
-
-
-                } else {
-                    inaRow = 0;
-                }
-
-
-            }
-            previousCard = testCard;
-            Counter++;
-
-
-        }
-        return inaRow;
-
-    }
-
-    public int checkSet(LinkedList<Card> toPlay) {
-        Integer Counter = 0;
-        Integer inaSet = 0;
-        Card firstCard = new Card(Faceenum.ACE, Suitenum.CLUBS);
-        Card previousCard = new Card(Faceenum.ACE, Suitenum.CLUBS);//This is just a throwaway to initialize previousCard.
-
-        for (Card testCard : toPlay) {
-            if (Counter > 0) {
-                if (previousCard.checkSet(testCard)) {
-                    if (inaSet == 0) {
-                        firstCard = testCard;
-                    }
-                    inaSet++;
-                    if (inaSet == 3) {
-                        System.out.println(firstCard + "is first. Three in a set");
-                    }
-
-
-                } else {
-                    inaSet = 0;
-                }
-
-
-            }
-            previousCard = testCard;
-            Counter++;
-
-
-        }
-        return inaSet;
     }
 }
-
-
-
-
-
-
-
-
-
-
