@@ -231,7 +231,7 @@ public class Main {
         return toPlay;
     }
 
-/*    public static void compareCard() {
+    public static void compareCard() {
         Card cardA = new Card(1, Card.spade);
         Card cardB = new Card(1, Card.club);
         Card cardC = new Card(2, Card.diamond);
@@ -250,7 +250,7 @@ public class Main {
                 int cardYface = cardY.getFace();
                 char cardYsuit = cardY.getSuit();
 
-                if (cardXface == cardYface && cardXsuit != cardYsuit) {
+                if (cardXface == cardYface && cardXsuit != cardYsuit) {//you don't need the suitcheck. If card check works, this doesn't matter.
                     System.out.println("Match");
                 } else if (cardXface == cardYface && cardXsuit == cardYsuit) {
                     System.out.println("Same Card");
@@ -260,5 +260,5 @@ public class Main {
             }
             System.out.println("\r\n");
         }
-    }*/
+    }
 }
