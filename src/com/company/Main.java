@@ -250,7 +250,7 @@ public class Main {
                 int cardYface = cardY.getFace();
                 char cardYsuit = cardY.getSuit();
 
-                if (cardXface == cardYface && cardXsuit != cardYsuit) {//you don't need the suitcheck. If card check works, this doesn't matter.
+                if (cardXface == cardYface && cardXsuit != cardYsuit) {//checks cards for matches. ED
                     System.out.println("Match");
                 } else if (cardXface == cardYface && cardXsuit == cardYsuit) {
                     System.out.println("Same Card");
