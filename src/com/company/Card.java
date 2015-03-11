@@ -48,10 +48,34 @@ public class Card {
         char[] delta = suits;
 
         int echo = charlie[alpha];
-        char foxtrot = delta [bravo];
+        char foxtrot = delta[bravo];
 
         Card drawnCard = new Card(echo, foxtrot);
 
         return drawnCard; //Returns the drawn card.-mh
     }
+
+    public boolean isNextinSuit(Card other) {//Finds ascending sequence between cards in the same suit(helps check for runs). ED
+
+        return ((this.suit == other.suit) && (this.isNext(face)));
+    }
+
+    public boolean checkSet(Card other) {//This checks for Sets only for face value. (helps find pairs and triplets. ED
+
+        return ((this.equals(other.face)));
+    }
+
+    public boolean equals(int face) { //checks for equality of the facevalue of the cards (used in Card Class) ED
+        return (this.face == face);
+    }
+
+    public boolean isNext(int face) {
+        return ((this.face + 1) == face);
+    }//Checks if the value of the next card in face is the next one. ED
+
+    public boolean isPrev(int face) {
+        return (this.face == (face + 1));
+    } //Checks if the value
+//of  the previous card is sequential. ED
+
 }

@@ -231,34 +231,90 @@ public class Main {
         return toPlay;
     }
 
-    public static void compareCard() {
-        Card cardA = new Card(1, Card.spade);
-        Card cardB = new Card(1, Card.club);
-        Card cardC = new Card(2, Card.diamond);
+    public int checkRun(LinkedList<Card> toPlay) {
+        Integer Counter = 0; //Counts how many runs there are. ED
+        Integer inaRow = 0; //Counts how many cards there are in a set. ED
+        Card firstCard = new Card(Card.cards[1], Card.suits[1]);
+        Card previousCard = new Card(Card.cards[1], Card.suits[1]);//This is just a throwaway to initialize previousCard.
 
-        LinkedList<Card> toCheck = new LinkedList<Card>();
-        toCheck.add(cardA);
-        toCheck.add(cardB);
-        toCheck.add(cardC);
-
-        for (int x = 0; x < toCheck.size(); x++) {
-            Card cardX = toCheck.get(x);
-            int cardXface = cardX.getFace();
-            char cardXsuit = cardX.getSuit();
-
-            for (Card cardY: toCheck) {
-                int cardYface = cardY.getFace();
-                char cardYsuit = cardY.getSuit();
-
-                if (cardXface == cardYface && cardXsuit != cardYsuit) {//checks cards for matches. ED
-                    System.out.println("Match");
-                } else if (cardXface == cardYface && cardXsuit == cardYsuit) {
-                    System.out.println("Same Card");
+        for (Card testCard : toPlay) {
+            if (Counter > 0) {
+                if (previousCard.isNextinSuit(testCard)) {//THis checks for a run by checking the next facevalue. ED
+                    if (inaRow == 0) {
+                        firstCard = testCard;
+                    }
+                    inaRow++;
+                    if (inaRow >= 3)//this checks for three in a row or more  (since runs more cards) ED
+                    {
+                        System.out.println(firstCard + "is first. Three in a row");
+                    }
                 } else {
-                    System.out.println("Other");
+                    inaRow = 0;
                 }
             }
-            System.out.println("\r\n");
+            previousCard = testCard;
+            Counter++;
         }
+        return inaRow;
+
+    }
+
+    public int checkSet(LinkedList<Card> toPlay) {
+        Integer Counter = 0;// Counts how many sets there are.
+        Integer inaSet = 0;// Counts how many are in a set.
+        Card firstCard = new Card(Card.cards[1], Card.suits[1]);//
+        Card previousCard = new Card(Card.cards[1], Card.suits[1]);//This is just a throwaway to initialize previousCard to find the first in the set. ED
+
+        for (Card testCard : toPlay) {
+            if (Counter > 0) {
+                if (previousCard.checkSet(testCard)) {
+                    if (inaSet == 0) {
+                        firstCard = testCard;
+                    }
+                    inaSet++;
+                    if (inaSet == 3) {
+                        System.out.println(firstCard + "is first. Three in a set");//this checks for three of a kind.
+                    }
+                } else {
+                    inaSet = 0;
+                }
+            }
+            previousCard = testCard;
+            Counter++;
+        }
+        return inaSet;
     }
 }
+
+
+//    public static void compareCard() {
+//        Card cardA = new Card(1, Card.spade);
+//        Card cardB = new Card(1, Card.club);
+//        Card cardC = new Card(2, Card.diamond);
+//
+//        LinkedList<Card> toCheck = new LinkedList<Card>();
+//        toCheck.add(cardA);
+//        toCheck.add(cardB);
+//        toCheck.add(cardC);
+//
+//        for (int x = 0; x < toCheck.size(); x++) {
+//            Card cardX = toCheck.get(x);
+//            int cardXface = cardX.getFace();
+//            char cardXsuit = cardX.getSuit();
+//
+//            for (Card cardY: toCheck) {
+//                int cardYface = cardY.getFace();
+//                char cardYsuit = cardY.getSuit();
+//
+//                if (cardXface == cardYface && cardXsuit != cardYsuit) {//checks cards for matches. ED
+//                    System.out.println("Match");
+//                } else if (cardXface == cardYface && cardXsuit == cardYsuit) {
+//                    System.out.println("Same Card");
+//                } else {
+//                    System.out.println("Other");
+//                }
+//            }
+//            System.out.println("\r\n");
+//        }
+//    }
+//}
