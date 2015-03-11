@@ -237,14 +237,14 @@ public class Main {
         Card firstCard = new Card(Card.cards[1], Card.suits[1]);
         Card previousCard = new Card(Card.cards[1], Card.suits[1]);//This is just a throwaway to initialize previousCard.
 
-        for (Card testCard : toPlay) {
-            if (Counter > 0) {
+        for (Card testCard : toPlay) {//loops through the toPlay Linkedlist. ED
+            if (Counter > 0) {//
                 if (previousCard.isNextinSuit(testCard)) {//THis checks for a run by checking the next facevalue. ED
                     if (inaRow == 0) {
                         firstCard = testCard;
                     }
                     inaRow++;
-                    if (inaRow >= 3)//this checks for three in a row or more  (since runs more cards) ED
+                    if (inaRow >= 3)//this checks for three in a row or more  (since runs can be more cards) ED
                     {
                         System.out.println(firstCard + "is first. Three in a row");
                     }
@@ -265,7 +265,7 @@ public class Main {
         Card firstCard = new Card(Card.cards[1], Card.suits[1]);//
         Card previousCard = new Card(Card.cards[1], Card.suits[1]);//This is just a throwaway to initialize previousCard to find the first in the set. ED
 
-        for (Card testCard : toPlay) {
+        for (Card testCard : toPlay) {//loops toPlay linkedList to check for cards that player wants to play.
             if (Counter > 0) {
                 if (previousCard.checkSet(testCard)) {
                     if (inaSet == 0) {
