@@ -93,7 +93,7 @@ public class Main {
                     printPlayed(playedCards); //Prints the cards which have been played-mh
                     draw(playerHand, takenCards);
                     toPlay(playerHand);
-                    //EDWIN - Add your comparison code here
+
                     playerScore = playerScore + playerPoints;
                     computerScore = computerScore + computerPoints;
                 } else if (playerScore >= finish && computerScore < finish) { //Series of checks for winner once a score goes over chosen total-mh
@@ -224,14 +224,15 @@ public class Main {
             System.out.println("Would you like to play another card? \n Y or N");
             String response = scanner1.nextLine();
             if (response.equalsIgnoreCase("N")) {
-                cont = false;
+                checkRun(toPlay);//takes the toPlay Linkedlist and sends it to checkRun method. ED
+                checkSet(toPlay);//takes the toPlay Linkedlist and sends it to checkSet method. ED
                 break;
             }
         }
         return toPlay;
     }
 
-    public int checkRun(LinkedList<Card> toPlay) {
+    public static int checkRun(LinkedList<Card> toPlay) {
         Integer Counter = 0; //Counts how many runs there are. ED
         Integer inaRow = 0; //Counts how many cards there are in a set. ED
         Card firstCard = new Card(Card.cards[1], Card.suits[1]);
@@ -250,6 +251,7 @@ public class Main {
                     }
                 } else {
                     inaRow = 0;
+                    System.out.println("not a run.");
                 }
             }
             previousCard = testCard;
@@ -259,7 +261,7 @@ public class Main {
 
     }
 
-    public int checkSet(LinkedList<Card> toPlay) {
+    public static int checkSet(LinkedList<Card> toPlay) {
         Integer Counter = 0;// Counts how many sets there are.
         Integer inaSet = 0;// Counts how many are in a set.
         Card firstCard = new Card(Card.cards[1], Card.suits[1]);//
@@ -277,6 +279,7 @@ public class Main {
                     }
                 } else {
                     inaSet = 0;
+                    System.out.println("not a set.");
                 }
             }
             previousCard = testCard;
