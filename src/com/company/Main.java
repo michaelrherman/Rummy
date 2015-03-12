@@ -76,127 +76,125 @@ public class Main {
                         int points = 0;
                         for (Card card : computerHand) //Totals points for computer hand -mh
                             points = card.getFace();
+                        if (points > 10) { //If it's greater than 10
+                            playerPoints = playerPoints + 10; //Adds 10
+                        } else if (points < 10) {
+                            playerPoints = playerPoints + points; //Otherwise adds the face value -mh
+                        }
+                        complete = true;
+                    } else if (computerHand.isEmpty()) { //If the computer goes out
+                        int points = 0;
+                        for (Card card : playerHand) //Totals points for player hand -mh
+                            points = card.getFace();
+                        if (points > 10) { //If it's greater than 10
+                            playerPoints = playerPoints + 10; //Adds 10
+                        } else if (points < 10) {
+                            playerPoints = playerPoints + points; //Otherwise adds the face value -mh
+                        }
+                        complete = true;
+                    }
+
+                    if (complete == true) { //Once the game is complete
+                        playerScore = playerScore + playerPoints; //Adds player's points to score
+                        computerScore = computerScore + computerPoints; //Adds computer's points to score-mh
+                        counter++; //Increase counter by one -mh
+                        break;
+                    }
+
+                    while (counter >= finish) { //Once chosen number of games is played, determines winner-mh
+                        if (playerScore < computerScore) { //If computer has more points, declares player the winner
+                            System.out.println("Player wins!");
+                            System.out.println("Players score: " + playerScore);
+                            System.out.println("Computer score: " + computerScore);
+                        } else if (playerScore > computerScore) { //If player has more points, declares computer the winner
+                            System.out.println("Computer wins!");
+                            System.out.println("Computer score: " + computerScore);
+                            System.out.println("Players score: " + playerScore);
+                        } else {
+                            System.out.println("It's a tie."); //Unless it's a tie-mh
+                            System.out.println("Players score: " + playerScore);
+                            System.out.println("Computer score: " + computerScore);
+                        }
+                        playing = false;
+                        break;
+                    }
+                }
+            } else if (playbyTotal == true) { //Plays by total-mh
+                    boolean end = false; //Acts as 1st-to-the-post check
+                    boolean complete = false;
+
+                    while (playerScore < finish && computerScore < finish) { //Plays as long as noone has exceeded total score
+                        playerPoints = 0; //Resets player and computer points (but not score) each hand
+                        computerPoints = 0;
+
+                        printHand(playerHand); //Prints the cards which are in the player's hand-mh
+                        printPlayed(playedCards); //Prints the cards which have been played-mh
+                        draw(playerHand, takenCards); //Asks the player if they want to draw-mh
+                        toPlay(playerHand); //Plays the player's hand-mh
+                        toPlayComputer(computerHand); //Plays the computer's hand-mh
+
+                        if (playerHand.isEmpty()) { //If the player goes out
+                            int points = 0;
+                            for (Card card : computerHand) //Totals points for computer hand -mh
+                                points = card.getFace();
                             if (points > 10) { //If it's greater than 10
                                 playerPoints = playerPoints + 10; //Adds 10
                             } else if (points < 10) {
                                 playerPoints = playerPoints + points; //Otherwise adds the face value -mh
                             }
                             complete = true;
-                    } else if (computerHand.isEmpty()) { //If the computer goes out
-                        int points = 0;
-                        for (Card card : playerHand) //Totals points for player hand -mh
-                            points = card.getFace();
-                        if (points > 10) { //If it's greater than 10
-                            playerPoints = playerPoints + 10; //Adds 10
-                        } else if (points < 10) {
-                            playerPoints = playerPoints + points; //Otherwise adds the face value -mh
-                        }
+                        } else if (computerHand.isEmpty()) { //If the computer goes out
+                            int points = 0;
+                            for (Card card : playerHand) //Totals points for player hand -mh
+                                points = card.getFace();
+                            if (points > 10) { //If it's greater than 10
+                                playerPoints = playerPoints + 10; //Adds 10
+                            } else if (points < 10) {
+                                playerPoints = playerPoints + points; //Otherwise adds the face value -mh
+                            }
                             complete = true;
-                    }
-                }
-
-                if (complete == true) { //Once the game is complete
-                    playerScore = playerScore + playerPoints; //Adds player's points to score
-                    computerScore = computerScore + computerPoints; //Adds computer's points to score-mh
-                    counter++; //Increase counter by one -mh
-                    break;
-                }
-            }
-            while (counter >= finish) { //Once chosen number of games is played, determines winner-mh
-                if (playerScore < computerScore) { //If computer has more points, declares player the winner
-                    System.out.println("Player wins!");
-                    System.out.println("Players score: " + playerScore);
-                    System.out.println("Computer score: " + computerScore);
-                } else if (playerScore > computerScore) { //If player has more points, declares computer the winner
-                    System.out.println("Computer wins!");
-                    System.out.println("Computer score: " + computerScore);
-                    System.out.println("Players score: " + playerScore);
-                } else {
-                    System.out.println("It's a tie."); //Unless it's a tie-mh
-                    System.out.println("Players score: " + playerScore);
-                    System.out.println("Computer score: " + computerScore);
-                }
-                playing = false;
-                break;
-            }
-
-            if (playbyTotal == true) { //Plays by total-mh
-
-                boolean end = false; //Acts as 1st-to-the-post check
-                boolean complete = false; //Continues game until complete
-
-                while (playerScore < finish && computerScore < finish) { //Plays as long as noone has exceeded total score
-                    playerPoints = 0; //Resets player and computer points (but not score) each hand
-                    computerPoints = 0;
-
-                    printHand(playerHand); //Prints the cards which are in the player's hand-mh
-                    printPlayed(playedCards); //Prints the cards which have been played-mh
-                    draw(playerHand, takenCards); //Asks the player if they want to draw-mh
-                    toPlay(playerHand); //Plays the player's hand-mh
-                    toPlayComputer(computerHand); //Plays the computer's hand-mh
-
-                    if (playerHand.isEmpty()) { //If the player goes out
-                        int points = 0;
-                        for (Card card : computerHand) //Totals points for computer hand -mh
-                            points = card.getFace();
-                        if (points > 10) { //If it's greater than 10
-                            playerPoints = playerPoints + 10; //Adds 10
-                        } else if (points < 10) {
-                            playerPoints = playerPoints + points; //Otherwise adds the face value -mh
                         }
-                        complete = true;
-                    } else if (computerHand.isEmpty()) { //If the computer goes out
-                        int points = 0;
-                        for (Card card : playerHand) //Totals points for player hand -mh
-                            points = card.getFace();
-                        if (points > 10) { //If it's greater than 10
-                            playerPoints = playerPoints + 10; //Adds 10
-                        } else if (points < 10) {
-                            playerPoints = playerPoints + points; //Otherwise adds the face value -mh
+                    }
+
+                    if (complete == true) { //Once complete
+                        playerScore = playerScore + playerPoints; //Adds player's points to score
+                        computerScore = computerScore + computerPoints; //Adds computer's points to score-mh
+                        if (playerScore > finish) { //Checks if player exceeded total-mh
+                            end = true;
+                            break;
+                        } else if (computerScore > finish) { //Checks if computer exceeded total-mh
+                            end = true;
+                            break;
                         }
-                        complete = true;
+
+                    }
+
+                    while (end == true) { //Once total is exceeded
+                        if (playerScore < computerScore) { //If computer score is greater, player wins
+                            System.out.println("Player wins!");
+                            System.out.println("Players score: " + playerScore);
+                            System.out.println("Computer score: " + computerScore);
+                            playing = false;
+                            break;
+                        } else if (playerScore > computerScore) { //If player score is greater, computer wins
+                            System.out.println("Computer wins!");
+                            System.out.println("Computer score: " + computerScore);
+                            System.out.println("Players score: " + playerScore);
+                            playing = false;
+                            break;
+                        } else {
+                            System.out.println("It's a tie."); //Unless it's a tie-mh
+                            System.out.println("Players score: " + playerScore);
+                            System.out.println("Computer score: " + computerScore);
+                            playing = false;
+                            break;
+                        }
                     }
                 }
 
-                if (complete == true) { //Once complete
-                    playerScore = playerScore + playerPoints; //Adds player's points to score
-                    computerScore = computerScore + computerPoints; //Adds computer's points to score-mh
-                    if (playerScore > finish) { //Checks if player exceeded total-mh
-                        end = true;
-                        break;
-                    } else if (computerScore > finish) { //Checks if computer exceeded total-mh
-                        end = true;
-                        break;
-                    }
-
-                }
-
-                while (end == true) { //Once total is exceeded
-                    if (playerScore < computerScore) { //If computer score is greater, player wins
-                        System.out.println("Player wins!");
-                        System.out.println("Players score: " + playerScore);
-                        System.out.println("Computer score: " + computerScore);
-                        playing = false;
-                        break;
-                    } else if (playerScore > computerScore) { //If player score is greater, computer wins
-                        System.out.println("Computer wins!");
-                        System.out.println("Computer score: " + computerScore);
-                        System.out.println("Players score: " + playerScore);
-                        playing = false;
-                        break;
-                    } else {
-                        System.out.println("It's a tie."); //Unless it's a tie-mh
-                        System.out.println("Players score: " + playerScore);
-                        System.out.println("Computer score: " + computerScore);
-                        playing = false;
-                        break;
-                    }
-                }
+                System.out.println("Thanks for playing!"); //You're welcome-mh
             }
-
-            System.out.println("Thanks for playing!"); //You're welcome-mh
         }
-    }
 
     public static void printHand(LinkedList<Card> playerHand) { //Prints the player's hand-mh
         System.out.println("Player's hand");
