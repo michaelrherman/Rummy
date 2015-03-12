@@ -300,6 +300,8 @@ public class Main {
     public static LinkedList<Card> toPlayComputer(LinkedList<Card> computerHand) {
         LinkedList<Card> toPlay = new LinkedList<Card>();
         toPlay = computerHand;
+        checkRun(toPlay);
+        checkSet(toPlay);
         return toPlay;
     }
 
