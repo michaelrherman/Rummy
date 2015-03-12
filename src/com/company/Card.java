@@ -62,19 +62,19 @@ public class Card {
 
     public boolean checkSet(Card other) {//This checks for Sets only for face value. (helps find pairs and triplets. ED
 
-        return ((this.equals(other.face)));
+        return ((this.face == other.face));
     }
 
-    public boolean equals(int face) { //checks for equality of the facevalue of the cards (used in Card Class) ED
-        return (this.face == face);
+    public boolean equals(Card other) { //checks for equality of the facevalue of the cards (used in Card Class) ED
+        return (this.face == other.face);
     }
 
-    public boolean isNext(int face) {
+    public boolean isNext(int Card) {
         return ((this.face + 1) == face);
     }//Checks if the value of the next card in face is the next one. ED
 
-    public boolean isPrev(int face) {
-        return (this.face == (face + 1));
+    public boolean isPrev(Card other) {
+        return (this.face == (other.face + 1));
     } //Checks if the value
 //of  the previous card is sequential. ED
 

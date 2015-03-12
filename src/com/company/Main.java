@@ -5,6 +5,13 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        LinkedList<Card> takenCards = new LinkedList<Card>(); //Starts LinkedList of cards which have already been drawn-mh
+        LinkedList<Card> playedCards = new LinkedList<Card>(); //Starts LinkedList of cards which have been played-mh
+        LinkedList<Card> playerHand = new LinkedList<Card>(); //Starts LinkedList representing the player's hand-mh
+        LinkedList<Card> computerHand = new LinkedList<Card>();
+
+
+
         boolean playing = true; //The game starts and playing is true-mh
         boolean playbyGame = false; //Initialized false-mh
         boolean playbyTotal = false; //Initialized false-mh
@@ -46,10 +53,7 @@ public class Main {
 
         while (playing == true) {
 
-            LinkedList<Card> takenCards = new LinkedList<Card>(); //Starts LinkedList of cards which have already been drawn-mh
-            LinkedList<Card> playedCards = new LinkedList<Card>(); //Starts LinkedList of cards which have been played-mh
-            LinkedList<Card> playerHand = new LinkedList<Card>(); //Starts LinkedList representing the player's hand-mh
-            LinkedList<Card> computerHand = new LinkedList<Card>(); //Starts LinkedList representing the computer's hand-mh
+            //Starts LinkedList representing the computer's hand-mh
 
             //Starts the game by filling the player's hands-mh
             LinkedList<Card> hand = playerHand;
@@ -67,7 +71,6 @@ public class Main {
 
                 while (counter < finish) {
                     printHand(playerHand); //Prints the cards which are in the player's hand-mh
-                    printPlayed(playedCards); //Prints the cards which have been played-mh
                     draw(playerHand, takenCards); //Asks the player if they want to draw-mh
                     toPlay(playerHand); //Plays the player's hand-mh
                     toPlayComputer(computerHand); //Plays the computer's hand-mh
@@ -132,6 +135,7 @@ public class Main {
                         draw(playerHand, takenCards); //Asks the player if they want to draw-mh
                         toPlay(playerHand); //Plays the player's hand-mh
                         toPlayComputer(computerHand); //Plays the computer's hand-mh
+
 
                         if (playerHand.isEmpty()) { //If the player goes out
                             int points = 0;
@@ -218,6 +222,7 @@ public class Main {
         }
     }
 
+
     public static void printPlayed(LinkedList<Card> playedCards) { //Prints the cards that have been played-mh
         System.out.println("\n");
         System.out.println("Cards on table");
@@ -295,7 +300,8 @@ public class Main {
         return toPlay;
     }
 
-    public static LinkedList<Card> toPlayComputer(LinkedList<Card> computerHand) {
+
+    public static  LinkedList<Card> toPlayComputer(LinkedList<Card> computerHand) {
         LinkedList<Card> toPlay = new LinkedList<Card>();
         toPlay = computerHand;
         checkRun(toPlay);
@@ -304,6 +310,7 @@ public class Main {
     }
 
     public static int checkRun(LinkedList<Card> toPlay) {
+        LinkedList<Card> playedRun = new LinkedList<Card>();
         Integer Counter = 0; //Counts how many runs there are. ED
         Integer inaRow = 0; //Counts how many cards there are in a set. ED
         Card firstCard = new Card(Card.cards[1], Card.suits[1]);
@@ -319,10 +326,13 @@ public class Main {
                     if (inaRow >= 3)//this checks for three in a row or more  (since runs can be more cards) ED
                     {
                         System.out.println(firstCard + "is first. Three in a row");
+                        playedRun.addAll(toPlay);
+                        printPlayed(playedRun);
                     }
                 } else {
                     inaRow = 0;
-                    System.out.println("not a run.");
+                    System.out.println("not a run. No cards transferred to table.");
+                    printPlayed(playedRun);
                 }
             }
             previousCard = testCard;
@@ -333,6 +343,7 @@ public class Main {
     }
 
     public static int checkSet(LinkedList<Card> toPlay) {
+        LinkedList<Card> playedSet = new LinkedList<Card>();
         Integer Counter = 0;// Counts how many sets there are.
         Integer inaSet = 0;// Counts how many are in a set.
         Card firstCard = new Card(Card.cards[1], Card.suits[1]);//
@@ -346,11 +357,14 @@ public class Main {
                     }
                     inaSet++;
                     if (inaSet == 3) {
-                        System.out.println(firstCard + "is first. Three in a set");//this checks for three of a kind.
+                        System.out.println(firstCard + "is first." + toPlay +  "Three in a set");//this checks for three of a kind.
+                        playedSet.addAll(toPlay);
+                        printPlayed(playedSet);
                     }
                 } else {
                     inaSet = 0;
-                    System.out.println("not a set.");
+                    System.out.println("not a set. No cards transferred to table.");
+                    printPlayed(playedSet);
                 }
             }
             previousCard = testCard;
@@ -358,7 +372,11 @@ public class Main {
         }
         return inaSet;
     }
-}
+
+
+        }
+
+
 
 
 //    public static void compareCard() {
