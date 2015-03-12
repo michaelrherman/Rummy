@@ -46,7 +46,7 @@ public class Main {
 
         while (playing == true) {
 
-            LinkedList<String> takenCards = new LinkedList<String>(); //Starts LinkedList of cards which have already been drawn-mh
+            LinkedList<Card> takenCards = new LinkedList<Card>(); //Starts LinkedList of cards which have already been drawn-mh
             LinkedList<Card> playedCards = new LinkedList<Card>(); //Starts LinkedList of cards which have been played-mh
             LinkedList<Card> playerHand = new LinkedList<Card>(); //Starts LinkedList representing the player's hand-mh
             LinkedList<Card> computerHand = new LinkedList<Card>(); //Starts LinkedList representing the computer's hand-mh
@@ -240,20 +240,20 @@ public class Main {
         }
     }
 
-    public static LinkedList<Card> getnewCard(LinkedList<Card> hand, LinkedList<String> takenCards) { //Gets a new card-mh
+    public static LinkedList<Card> getnewCard(LinkedList<Card> hand, LinkedList<Card> takenCards) { //Gets a new card-mh
         Card newCard = Card.getrandomCard(); //Calls getrandomCard() from Card class-mh
-        String newCardString = newCard.toString();
-        boolean retry = takenCards.contains(newCardString); //Verifies it's not one that's already generated-mh
+
+        boolean retry = takenCards.contains(newCard); //Verifies it's not one that's already generated-mh
         if (retry == true) { //If it is,
             newCard = Card.getrandomCard(); //gets a new card-mh
         } else if (retry == false) { //If not,
-            takenCards.add(newCardString); //Adds to takenCards
+            takenCards.add(newCard); //Adds to takenCards
             hand.add(newCard); //Adds to playerHand-mh
         }
         return hand; //
     }
 
-    public static LinkedList<Card> draw(LinkedList<Card> playerHand, LinkedList<String> takenCards) { //Draws a card-mh
+    public static LinkedList<Card> draw(LinkedList<Card> playerHand, LinkedList<Card> takenCards) { //Draws a card-mh
         Scanner scanner = new Scanner(System.in);
         boolean cont = true;
 
